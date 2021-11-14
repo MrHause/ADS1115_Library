@@ -123,22 +123,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-/*
-  ADSWrite[0] = 0x01;
-  ADSWrite[1] = 0x40;
-  ADSWrite[2] = 0x80;
-  HAL_I2C_Master_Transmit(&hi2c1, ADS1115_ADR, ADSWrite, 3, 100);
 
-  ADSWrite[0] = 0x03;
-  ADSWrite[1] = 0xFF;
-  ADSWrite[2] = 0xFF;
-  HAL_I2C_Master_Transmit(&hi2c1, ADS1115_ADR, ADSWrite, 3, 100);
-
-  ADSWrite[0] = 0x02;
-  ADSWrite[1] = 0x00;
-  ADSWrite[2] = 0x00;
-  HAL_I2C_Master_Transmit(&hi2c1, ADS1115_ADR, ADSWrite, 3, 100);
-*/
   configReg.channel = CHANNEL_AIN0_GND;
   configReg.pgaConfig = PGA_6_144;
   configReg.operatingMode = MODE_SINGLE_SHOT;
