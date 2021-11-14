@@ -114,12 +114,12 @@ int16_t ADS1115_getData();
 
 void ADS1115_setThresholds(ADS1115_Handle_t *pConfig, int16_t lowValue, int16_t highValue);
 
-void ADS1115_startContinousMode(ADS1115_Handle_t* pConfig);
-
-void ADS1115_stopContinousMode(ADS1115_Handle_t* pConfig);
-
 void ADS1115_flushData(ADS1115_Handle_t* pConfig);
 
 void ADS1115_setConversionReadyPin(ADS1115_Handle_t* pConfig);
+
+void ADS1115_startContinousMode(ADS1115_Handle_t* pConfig);
+
+void ADS1115_stopContinousMode(ADS1115_Handle_t* pConfig);
 
 #endif /* INC_ADS1115_H_ */
