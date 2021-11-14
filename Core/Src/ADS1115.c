@@ -32,7 +32,7 @@ void ADS1115_updateConfig(ADS1115_Handle_t *pConfig, ADS1115_Config_t config){
 	bytes[0] = 0x01;
 	bytes[1] |= (config.channel << 6) | (config.pgaConfig << 3)
 					| (config.operatingMode << 0);
-	bytes[2] |= (config.dataRate << 7) | (config.compareMode << 4) | (config.polarityMode << 3)
+	bytes[2] |= (config.dataRate << 5) | (config.compareMode << 4) | (config.polarityMode << 3)
 					| (config.latchingMode << 2) | (config.queueComparator << 1);
 
 	HAL_I2C_Master_Transmit(pConfig->hi2c, (pConfig->address << 1), bytes, 3, 100);
@@ -97,7 +97,7 @@ void ADS1115_startContinousMode(ADS1115_Handle_t* pConfig){
 	bytes[0] = 0x01;
 	bytes[1] |= (pConfig->config.channel << 6) | (pConfig->config.pgaConfig << 3)
 					| (0 << 0);
-	bytes[2] |= (pConfig->config.dataRate << 7) | (pConfig->config.compareMode << 4) | (pConfig->config.polarityMode << 3)
+	bytes[2] |= (pConfig->config.dataRate << 5) | (pConfig->config.compareMode << 4) | (pConfig->config.polarityMode << 3)
 					| (pConfig->config.latchingMode << 2) | (pConfig->config.queueComparator << 1);
 
 	HAL_I2C_Master_Transmit(pConfig->hi2c, (pConfig->address << 1), bytes, 3, 100);
@@ -108,7 +108,7 @@ void ADS1115_stopContinousMode(ADS1115_Handle_t* pConfig){
 	bytes[0] = 0x01;
 	bytes[1] |= (pConfig->config.channel << 6) | (pConfig->config.pgaConfig << 3)
 					| (1 << 0);
-	bytes[2] |= (pConfig->config.dataRate << 7) | (pConfig->config.compareMode << 4) | (pConfig->config.polarityMode << 3)
+	bytes[2] |= (pConfig->config.dataRate << 5) | (pConfig->config.compareMode << 4) | (pConfig->config.polarityMode << 3)
 					| (pConfig->config.latchingMode << 2) | (pConfig->config.queueComparator << 1);
 
 	HAL_I2C_Master_Transmit(pConfig->hi2c, (pConfig->address << 1), bytes, 3, 100);

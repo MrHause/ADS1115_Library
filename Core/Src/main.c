@@ -61,6 +61,8 @@ void SystemClock_Config(void);
 uint8_t ADSWrite[6];
 int16_t readValue;
 float voltValue;
+float voltProbes[256];
+static uint16_t probeNum;
 const float voltageConv = 6.114 / 32768.0f;
 
 ADS1115_Config_t configReg;
@@ -70,11 +72,11 @@ static uint8_t isCountinousModeRunning = 0;
 // EXTI Line9 External Interrupt ISR Handler CallBackFun
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-
 	if (GPIO_Pin == GPIO_PIN_10) // If The INT Source Is EXTI Line9 (A9 Pin)
 	{
 		int16_t readValue = ADS1115_getData(pADS);
 		voltValue = readValue * voltageConv;
+		probeNum++;
 	}
 
 	if (GPIO_Pin == GPIO_PIN_13){
@@ -140,7 +142,7 @@ int main(void)
   configReg.channel = CHANNEL_AIN0_GND;
   configReg.pgaConfig = PGA_6_144;
   configReg.operatingMode = MODE_SINGLE_SHOT;
-  configReg.dataRate = DRATE_128;
+  configReg.dataRate = DRATE_475;
   configReg.compareMode = COMP_HYSTERESIS;
   configReg.polarityMode = POLARITY_ACTIVE_LOW;
   configReg.latchingMode = LATCHING_NONE;
@@ -157,25 +159,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  //readValue = ADS1115_oneShotMeasure(pADS);
-	  //voltValue = readValue * voltageConv;
-	  HAL_Delay(200);
+	  probeNum = 0;
+	  ADS1115_startContinousMode(pADS);
+	  HAL_Delay(1000);
+	  ADS1115_stopContinousMode(pADS);
+	  HAL_Delay(1000);
 
-
-/*
-	  ADSWrite[0] = 0x00;
-	  HAL_I2C_Master_Transmit(&hi2c1, ADS1115_ADR, ADSWrite, 1, 100);
-	  HAL_Delay(20);
-	  HAL_I2C_Master_Receive(&hi2c1, ADS1115_ADR, ADSWrite, 2, 100);
-	  readValue = ((ADSWrite[0] << 8) | ADSWrite[1]);
-	  if(readValue < 0)
-		  readValue = 0;
-
-	  voltValue = readValue * voltageConv;
-	  int a = 2;
-
-	  HAL_Delay(3000);
-	  */
   }
   /* USER CODE END 3 */
 }
