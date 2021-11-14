@@ -2,7 +2,7 @@
  * ADS1115.h
  *
  *  Created on: 9 lis 2021
- *      Author: mrhau
+ *      Author: Filip Rak
  */
 
 #ifndef INC_ADS1115_H_
