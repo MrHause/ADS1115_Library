@@ -104,8 +104,22 @@ void ADS1115_deinit();
 
 void ADS1115_updateConfig(ADS1115_Handle_t *pConfig, ADS1115_Config_t config);
 
+void ADS1115_updateI2Chandler(ADS1115_Handle_t *pConfig, I2C_HandleTypeDef *hi2c);
+
+void ADS1115_updateAddress(ADS1115_Handle_t *pConfig, uint16_t address);
+
 int16_t ADS1115_oneShotMeasure();
 
 int16_t ADS1115_getData();
+
+void ADS1115_setThresholds(ADS1115_Handle_t *pConfig, int16_t lowValue, int16_t highValue);
+
+void ADS1115_startContinousMode(ADS1115_Handle_t* pConfig);
+
+void ADS1115_stopContinousMode(ADS1115_Handle_t* pConfig);
+
+void ADS1115_flushData(ADS1115_Handle_t* pConfig);
+
+void ADS1115_setConversionReadyPin(ADS1115_Handle_t* pConfig);
 
 #endif /* INC_ADS1115_H_ */
