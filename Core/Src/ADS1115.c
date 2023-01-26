@@ -117,9 +117,8 @@ void ADS1115_stopContinousMode(ADS1115_Handle_t* pConfig){
 
 static void prepareConfigFrame(uint8_t *pOutFrame, ADS1115_Config_t config){
 	pOutFrame[0] = 0x01;
-	pOutFrame[1] |= (config.channel << 6) | (config.pgaConfig << 3)
+	pOutFrame[1] |= (config.channel << 4) | (config.pgaConfig << 1)
 					| (config.operatingMode << 0);
 	pOutFrame[2] |= (config.dataRate << 5) | (config.compareMode << 4) | (config.polarityMode << 3)
-					| (config.latchingMode << 2) | (config.queueComparator << 1);
-}
+					| (config.latchingMode << 2) | (config.queueComparator << 0);
 
