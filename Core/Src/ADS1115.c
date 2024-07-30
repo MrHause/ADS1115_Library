@@ -121,4 +121,5 @@ static void prepareConfigFrame(uint8_t *pOutFrame, ADS1115_Config_t config){
 					| (config.operatingMode << 0);
 	pOutFrame[2] |= (config.dataRate << 5) | (config.compareMode << 4) | (config.polarityMode << 3)
 					| (config.latchingMode << 2) | (config.queueComparator << 0);
+}
 
